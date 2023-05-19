@@ -1,0 +1,9 @@
+topics:
+  - name: Washington Navel Orange Temperature
+    topic: navel-orange-tree/sensor/temperature
+  - name: Washington Navel Orange Humidity
+    topic: navel-orange-tree/sensor/humidity
+  - name: Washington Navel Orange Soil Humidity
+    topic: navel-orange-tree/sensor/soilhumidity
+  - name: Washington Navel Orange pH
+    topic: navel-orange-tree/sensor/ph
