@@ -17,12 +17,14 @@ def on_message(client, userdata, msg):
     registry = CollectorRegistry()
 
     baseName = "mqtt:"
+    metricName = baseName + topic.replace("/", "_").replace("-", "_")
+    print(metricName)
 
-    gauge_metric = Gauge(baseName + topic, 'MQTT Data', ['topic'], registry=registry)
+    gauge_metric = Gauge(metricName, 'MQTT Data', ['topic'], registry=registry)
     gauge_metric.labels(topic=topic).set(float(payload))
 
     # Push metrics to Pushgateway
-    push_to_gateway(os.environ.get('PUSHGATEWAY_ADDRESS'), job='pushgateway', registry=registry)
+    push_to_gateway(os.environ.get('PUSHGATEWAY_ADDRESS'), job=metricName, registry=registry)
 
 # load .env files
 load_dotenv()
@@ -55,4 +57,5 @@ try:
         pass
 finally:
     # Stop MQTT client loop
+    print("Disconnected from MQTT client")
     client.loop_stop()

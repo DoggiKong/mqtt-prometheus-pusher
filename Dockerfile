@@ -5,19 +5,20 @@ FROM python:3.11
 WORKDIR /app
 
 # Copy the Pipfile and Pipfile.lock to the container
-COPY Pipfile Pipfile.lock /app/
+COPY Pipfile .
+COPY Pipfile.lock .
 
 # Install project dependencies with Pipenv
 RUN pip install pipenv && pipenv install
 
 # Copy the Yaml file to the container
-COPY topics.yml /app/
+COPY topics.yml .
 
 # Copy the Python file to the container
-COPY index.py /app/
+COPY index.py .
 
 # Copy the .env file to the container
-COPY .env /app/
+COPY .env .
 
 # Run the Python file with Pipenv
 CMD pipenv run python index.py
